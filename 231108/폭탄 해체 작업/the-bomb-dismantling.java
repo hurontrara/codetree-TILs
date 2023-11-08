@@ -1,7 +1,29 @@
 import java.util.PriorityQueue;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 public class Main {
+
+    static class Value implements Comparable<Value> {
+
+        int reward;
+        int cnt;
+
+        Value(int reward, int cnt) {
+            this.reward = reward;
+            this.cnt = cnt;
+        }
+
+        @Override
+        public int compareTo(Value value) {
+
+            if (this.reward == value.reward)
+                return this.cnt - value.cnt;
+
+            return value.reward - this.reward;
+
+        }
+    }
 
     static class Point implements Comparable<Point> {
 
@@ -18,10 +40,9 @@ public class Main {
             if (this.time == point.time)
                 return point.reward - this.reward;
 
-            return this.time - point.time;
+            return point.time - this.time;
 
         }
-
     }
 
 
@@ -42,24 +63,34 @@ public class Main {
 
     private static void greedy() {
 
-        int time = 0;
-        int globalReward = 0;
+        int time = queue.peek().time;
+        int sumReward = 0;
 
-        while (!queue.isEmpty()) {
+        PriorityQueue<Value> valueTreeSet = new PriorityQueue<>();
 
-            Point poll = queue.poll();
+        int cnt = 0;
+        while (time != -1) {
 
-            if (poll.time < time)
+            while (!queue.isEmpty() && queue.peek().time == time) {
+                Point poll = queue.poll();
+                valueTreeSet.add(new Value(poll.reward, cnt));
+                cnt++;
+            }
+
+            Value poll = valueTreeSet.poll();
+
+            time--;
+
+            if (poll == null)
                 continue;
+            else
+                sumReward += poll.reward;
 
-            time = poll.time + 1;
-            globalReward += poll.reward;
 
         }
 
-        System.out.println(globalReward);
+        System.out.println(sumReward);
 
     }
-
 
 }
