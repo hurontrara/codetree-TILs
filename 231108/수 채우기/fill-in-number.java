@@ -11,37 +11,31 @@ public class Main {
 
     }
 
-    private static int greedy() {
+    private static void greedy() {
 
         int cnt = 0;
         int restValue = n;
 
-        if (n == 1) {
+        if (n < 5 || n == 8) {
             System.out.println(-1);
-            return 0;
+            System.exit(0);
         }
 
-        if (n % 5 == 1) {
-            cnt += (n / 5) - 1;
+        if (n % 5 == 1 || n % 5 == 3) {
+            cnt += (restValue / 5) - 1;
             restValue -= 5 * cnt;
-            cnt += (restValue / 2);
+
+            cnt += restValue / 2;
             System.out.println(cnt);
-            return 0;
+            System.exit(0);
         }
 
-        cnt += (restValue / 5);
+        cnt += restValue / 5;
         restValue -= 5 * cnt;
+        cnt += restValue / 2;
+        System.out.println(cnt);
 
-        int twoCount = restValue / 2;
-        cnt += twoCount;
-        restValue -= twoCount * 2;
 
-        if (restValue != 0)
-            System.out.println(-1);
-        else
-            System.out.println(cnt);
-
-        return 0;
 
 
     }
