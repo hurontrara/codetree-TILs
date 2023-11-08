@@ -40,9 +40,11 @@ public class Main {
             treeSet.add(new Point(sc.nextInt()));
         }
 
-        for (Point point : treeSet) {
-            System.out.print(point.value);
+        while (!treeSet.isEmpty()) {
+            System.out.print(treeSet.first().value);
+            treeSet.remove(treeSet.first());
         }
+
 
     }
 
