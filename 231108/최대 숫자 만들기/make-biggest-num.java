@@ -20,7 +20,7 @@ public class Main {
             String latterFormerString = latterString + formerString;
 
 
-            return Integer.parseInt(latterFormerString) - Integer.parseInt(formerLatterString);
+            return Long.compare(Long.parseLong(latterFormerString), Long.parseLong(formerLatterString));
         }
 
 
