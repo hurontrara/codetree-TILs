@@ -1,4 +1,3 @@
-import java.lang.annotation.Target;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -21,8 +20,11 @@ public class Main {
             long leftScore = (long) this.typeOneCount * point.typeTwoCount;
             long rightScore = (long) this.typeTwoCount * point.typeOneCount;
 
-            if (leftScore >= rightScore)
+            if (leftScore > rightScore)
                 return -1;
+
+            if (leftScore == rightScore)
+                return 0;
 
             return 1;
 
