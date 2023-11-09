@@ -1,113 +1,77 @@
-import java.util.PriorityQueue;
 import java.util.Scanner;
+import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.Collections;
+
+class BStone implements Comparable<BStone> {
+    int b, a;
+
+    public BStone(int b, int a) {
+        this.b = b;
+        this.a = a;
+    }
+
+    @Override
+    public int compareTo(BStone bs) {
+        return this.b - bs.b;         // b 기준 오름차순으로 정렬합니다.
+    }
+}
 
 public class Main {
-
-    static class Pair implements Comparable<Pair> {
-
-        int a;
-        int b;
-
-        Pair(int a, int b) {
-            this.a = a;
-            this.b = b;
-        }
-
-
-        @Override
-        public int compareTo(Pair pair) {
-
-            if (this.b == pair.b)
-                return this.a - pair.a;
-
-            return this.b - pair.b;
-
-        }
-    }
-
-
-    static class Point implements Comparable<Point> {
-
-        int a;
-        int b;
-
-        Point(int a, int b) {
-            this.a = a;
-            this.b = b;
-        }
-
-
-        @Override
-        public int compareTo(Point point) {
-
-            if (this.a == point.a)
-                return this.b - point.b;
-
-            return this.a - point.a;
-
-        }
-
-    }
-
-    static Scanner sc = new Scanner(System.in);
-    static int n = sc.nextInt();
-    static int m = sc.nextInt();
-
-    static PriorityQueue<Integer> redQueue = new PriorityQueue<>();
-    static PriorityQueue<Point> blackQueue = new PriorityQueue<>();
+    public static final int MAX_C = 100000;
+    
+    // 변수 선언
+    public static int c, n;
+    
+    public static int[] redStones = new int[MAX_C];
+    public static TreeSet<Integer> redS = new TreeSet<>();
+    public static ArrayList<BStone> blackStones = new ArrayList<>();
 
     public static void main(String[] args) {
-
-        for (int i = 0; i < n; i++) {
-            redQueue.add(sc.nextInt());
+        Scanner sc = new Scanner(System.in);
+        // 입력:
+        c = sc.nextInt();
+        n = sc.nextInt();
+        for(int i = 0; i < c; i++)
+            redStones[i] = sc.nextInt();
+        
+        for(int i = 0; i < n; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            blackStones.add(new BStone(b, a));
         }
 
-        for (int i = 0; i < m; i++) {
-            blackQueue.add(new Point(sc.nextInt(), sc.nextInt()));
-        }
+        // 빨간 돌을 전부 treeset에 넣어줍니다.
+        // 추후 검은색 돌 기준으로
+        // Aj보다 같거나 큰 최소 Ti값을 빠르게 찾기 위해
+        // treeset을 이용합니다.
+        for(int i = 0; i < c; i++)
+            redS.add(redStones[i]);
 
-        greedy();
+        // b 기준 오름차순 정렬을 진행합니다.
+        Collections.sort(blackStones);
 
+        // b가 작은 돌부터 보며
+        // a보다 같거나 큰 최소 Ti를 찾습니다.
+        // 이 값이 만약 b보다 같거나 작다면
+        // 이 돌을 선택하는 것이 최선입니다.
+        int ans = 0;
+        for(int i = 0; i < n; i++) {
+            int a = blackStones.get(i).a;
+            int b = blackStones.get(i).b;
 
-
-    }
-
-    private static void greedy() {
-
-        PriorityQueue<Pair> localQueue = new PriorityQueue<>();
-
-        int cnt = 0;
-        while (!redQueue.isEmpty()) {
-
-            Integer redBall = redQueue.poll();
-
-            while (!blackQueue.isEmpty() && blackQueue.peek().a <= redBall) {
-
-                Point blackBall = blackQueue.poll();
-
-                localQueue.add(new Pair(blackBall.a, blackBall.b));
+            // a보다 같거나 큰 값이 있다면
+            if(redS.ceiling(a) != null) {
+                // 최소 Ti를 선택합니다.
+                int ti = redS.ceiling(a);
+                // Ti가 b보다 같거나 작다면
+                // 매칭을 진행합니다.
+                if(ti <= b) {
+                    ans++;
+                    redS.remove(ti);
+                }
             }
-
-            while (!localQueue.isEmpty()) {
-
-                Pair localBall = localQueue.poll();
-
-                if (localBall.b < redBall)
-                    continue;
-
-                cnt++;
-                break;
-
-            }
-
-
-
         }
-
-        System.out.println(cnt);
-
-
+        System.out.print(ans);
     }
-
-
 }
