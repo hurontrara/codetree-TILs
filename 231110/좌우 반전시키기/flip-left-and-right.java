@@ -8,6 +8,11 @@ public class Main {
 
     public static void main(String[] args) {
 
+        for (int i = 0; i < n; i++) {
+            array[i] = sc.nextInt();
+        }
+
+
         int cnt = 0;
         for (int i = 1; i < n; i++) {
 
@@ -17,11 +22,14 @@ public class Main {
             }
         }
 
-        if (array[n - 1] == 1)
-            System.out.println(cnt);
-        else
-            System.out.println(-1);
+        for (int i = 0; i < n; i++) {
+            if (array[i] != 1) {
+                System.out.println(-1);
+                System.exit(0);
+            }
+        }
 
+        System.out.println(cnt);
     }
 
     private static void press(int index) {
