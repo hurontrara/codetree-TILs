@@ -6,6 +6,7 @@ public class Main {
 
     static int n, m;
     static int[][] matrix;
+    static int[][] board;
 
     static int answer = -1000000000;
 
@@ -15,6 +16,7 @@ public class Main {
         String[] nmArray = br.readLine().split(" ");
         n = Integer.parseInt(nmArray[0]); m = Integer.parseInt(nmArray[1]);
         matrix = new int[n][m];
+        board = new int[n][m];
         for (int i = 0; i < n; i++) {
             matrix[i] = Stream.of(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         }
@@ -45,26 +47,39 @@ public class Main {
     }
 
     static void calculate(int aRow, int aCol, int bRow, int bCol, int cRow, int cCol, int dRow, int dCol) {
-
-        if (cRow >= aRow && cRow <= bRow && cCol >= aCol && cCol <= bCol)
-            return;
         
         int localSum = 0;
         for (int i = aRow; i <= bRow; i++) {
             for (int j = aCol; j <= bCol; j++) {
                 localSum += matrix[i][j];
+                board[i][j] = 1;
             }
         }
 
         for (int i = cRow; i <= dRow; i++) {
             for (int j = cCol; j <= dCol; j++) {
+
+                if (board[i][j] == 1) {
+                    clearBoard();
+                    return;
+                }
+
                 localSum += matrix[i][j];
             }
         }
 
         answer = Math.max(localSum, answer);
+        clearBoard();
 
     }
 
+    static void clearBoard() {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                board[i][j] = 0;
+            }
+        }
 
+
+    }
 }
