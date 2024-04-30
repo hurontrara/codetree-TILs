@@ -24,8 +24,8 @@ public class Main {
             for (int aCol = 0; aCol < m; aCol++) { 
                 for (int bRow = aRow; bRow < n; bRow++) {
                     for (int bCol = aCol; bCol < m; bCol++) {
-                        for (int cRow = aRow; cRow < n; cRow++) {
-                            for (int cCol = aCol; cCol < m; cCol++) {
+                        for (int cRow = 0; cRow < n; cRow++) {
+                            for (int cCol = 0; cCol < m; cCol++) {
                                 for (int dRow = cRow; dRow < n; dRow++) {
                                     for (int dCol = cCol; dCol < m; dCol++) {
                                         calculate(aRow, aCol, bRow, bCol, cRow, cCol, dRow, dCol);
