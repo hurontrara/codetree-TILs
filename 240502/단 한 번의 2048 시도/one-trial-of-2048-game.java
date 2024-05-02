@@ -18,11 +18,15 @@ public class Main {
         dir = br.readLine();
 
         // 로직
-        rotate();
+        int rotateTime = dir.equals("D") ? 0 : dir.equals("R") ? 1 : dir.equals("U") ? 2 : 3;
+
+        for (int i = 0; i < rotateTime; i++) {
+            rotate();
+        }
         gravity();
-        rotate();
-        rotate();
-        rotate();
+        for (int i = 0; i < (4 - rotateTime) % 4; i++) {
+            rotate();
+        }
 
         // 출력
         for (int i = 0; i < 4; i++) {
