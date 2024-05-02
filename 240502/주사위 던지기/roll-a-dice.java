@@ -100,9 +100,20 @@ public class Main {
     }
 
     static void rolling(String dir) {
-        dice.shift(dir);
+
         int intDir = dir.equals("L") ? 0 : dir.equals("R") ? 1 : dir.equals("U") ? 2 : 3;
-        startRow += dx[intDir]; startCol += dy[intDir];
+
+        if (existCheck(startRow + dx[intDir], startCol + dy[intDir])) {
+            
+            dice.shift(dir);
+
+            startRow += dx[intDir]; startCol += dy[intDir];
+        }
+
+    }
+
+    static boolean existCheck(int row, int col) {
+        return row >= 0 && row < size && col >= 0 && col < size;
     }
 
 
