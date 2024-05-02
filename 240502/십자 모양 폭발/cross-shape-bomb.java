@@ -38,18 +38,29 @@ public class Main {
 
     static void gravity() {
 
-        int tmp = -1;
-        for (int i = size - 1; i > 0; i--) {
-            for (int j = 0; j < size; j++) {
+        int[] tempArray = new int[size];
+        int localIndex = size - 1;
 
-                if (matrix[i][j] == 0) {
-                    tmp = matrix[i - 1][j];
-                    matrix[i - 1][j] = matrix[i][j];
-                    matrix[i][j] = tmp;
+        for (int col = 0; col < size; col++) {
+
+            for (int row = size - 1; row >= 0; row--) {
+
+                if (matrix[row][col] > 0) {
+                    tempArray[localIndex--] = matrix[row][col];
                 }
 
             }
+
+            for (int row = 0; row < size; row++) {
+                matrix[row][col] = tempArray[row];
+                tempArray[row] = 0;
+            }
+
+            localIndex = size - 1;
+
+
         }
+
 
     }
 
