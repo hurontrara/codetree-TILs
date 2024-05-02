@@ -79,7 +79,10 @@ public class Main {
 
             for (int i = 0; i < 4; i++) {
                 tempArray[i] = 0;
+                secondTempArray[i] = 0;
             }
+
+
 
         }
 
