@@ -21,12 +21,12 @@ public class Main {
 
         // 로직
         for (int i = 0; i < time; i++) {
-            
+
             while (bombProcess()) {};
             rotate();
             gravity();
         }
-        bombProcess();
+        while (bombProcess()) {};
 
         // 출력
         for (int i = 0; i < size; i++) {
@@ -49,11 +49,11 @@ public class Main {
 
             idx = size - 1;
             for (int row = size - 1; row >= 0; row--) {
-                
+
                 if (matrix[row][col] != 0) {
                     tempArray[idx--] = matrix[row][col];
                 }
-                
+
 
             }
 
@@ -96,7 +96,7 @@ public class Main {
                 if (matrix[row][col] != 0 && diff >= bombCount) {
 
 
-                    isBomb = true; 
+                    isBomb = true;
                     for (int k = 0; k < diff; k++) {
                         matrix[row + k][col] = 0;
                     }
@@ -107,8 +107,7 @@ public class Main {
 
         }
 
-        if (isBomb)
-            gravity();
+        gravity();
 
         return isBomb;
 
