@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.stream.Stream;
 import java.util.*;
 
 class Head {
@@ -79,8 +78,8 @@ public class Main {
         for (int i = 0; i < headList.size(); i++) {
             localDir = dirList.get(time - i);
             Head localHead = headList.get(i);
-            localHead.x += dx[dir];
-            localHead.y += dy[dir];
+            localHead.x += dx[localDir];
+            localHead.y += dy[localDir];
         }
 
         // 사과 있으면 추가
@@ -101,13 +100,13 @@ public class Main {
                 System.exit(0);
             }
             headMatrix[ahead.x][ahead.y] = 1;
-                
+
         }
 
         // 안꼬여있으면 복구
         for (int i = 0; i < headList.size(); i++) {
             Head bhead = headList.get(i);
-            matrix[bhead.x][bhead.y] = 0;
+            headMatrix[bhead.x][bhead.y] = 0;
         }
 
 
