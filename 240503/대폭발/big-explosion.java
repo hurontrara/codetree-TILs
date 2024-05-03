@@ -20,7 +20,7 @@ public class Main {
 
     static int size, time, startRow, startCol;
     static int[][] matrix;
-    static Queue<Bomb> queue = new LinkedList<>();
+    static List<Bomb> list = new ArrayList<>();
 
     static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
@@ -37,7 +37,7 @@ public class Main {
         matrix = new int[size][size];
 
         matrix[startRow][startCol] = 1;
-        queue.add(new Bomb(startRow, startCol));
+        list.add(new Bomb(startRow, startCol));
 
         // 로직
         for (int i = 1; i <= time; i++) {
@@ -56,11 +56,11 @@ public class Main {
 
     static void bombProcess(int time) {
 
-        int queueSize = queue.size();
+        int listSize = list.size();
 
-        for (int i = 0; i < queueSize; i++) {
+        for (int i = 0; i < listSize; i++) {
 
-            Bomb bomb = queue.poll();
+            Bomb bomb = list.get(i);
 
             for (int dir = 0; dir < 4; dir++) {
 
@@ -69,7 +69,7 @@ public class Main {
 
                 if (existCheck(currentRow, currentCol) && matrix[currentRow][currentCol] == 0) {
                     matrix[currentRow][currentCol] = 1;
-                    queue.add(new Bomb(currentRow, currentCol));
+                    list.add(new Bomb(currentRow, currentCol));
                 }
 
 
