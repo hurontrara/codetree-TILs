@@ -8,7 +8,8 @@ public class Main {
     static int[][] ballMatrix;
     static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
-    static int answer;
+    static int answer = 0;
+    static int[][] tmpMatrix;
 
     public static void main(String[] args) throws Exception {
         // 초기화
@@ -18,6 +19,7 @@ public class Main {
         size = Integer.parseInt(sbArray[0]); ballCount = Integer.parseInt(sbArray[1]); time = Integer.parseInt(sbArray[2]);
         matrix = new int[size][size];
         ballMatrix = new int[size][size];
+        tmpMatrix = new int[size][size];
         for (int i = 0; i < size; i++) {
             matrix[i] = Stream.of(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         }
@@ -27,7 +29,6 @@ public class Main {
             int col = Integer.parseInt(rcArray[1]) - 1;
             ballMatrix[row][col] = 1;
         }
-        answer = ballCount;
 
         // 로직
         // 1. 움직이기
@@ -39,6 +40,14 @@ public class Main {
         }
 
         // 출력
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+
+                if (ballMatrix[i][j] == 1) {
+                    answer++;
+                }
+            }
+        }
         System.out.print(answer);
 
 
@@ -51,7 +60,6 @@ public class Main {
 
                 if (ballMatrix[i][j] > 1) {
 
-                    ballCount -= ballMatrix[i][j];
                     ballMatrix[i][j] = 0;
 
                 }
@@ -68,23 +76,37 @@ public class Main {
 
                 if (ballMatrix[i][j] == 1) {
 
+                    int value = 0;
+                    int localDir = -1;
                     for (int dir = 0; dir < 4; dir++) {
 
                         int futureRow = i + dx[dir];
                         int futureCol = j + dy[dir];
 
-                        if (existCheck(futureRow, futureCol) && matrix[i][j] < matrix[futureRow][futureCol]) {
+                        if (existCheck(futureRow, futureCol) && value < matrix[futureRow][futureCol]) {
 
-                            ballMatrix[futureRow][futureCol] += 1;
-                            ballMatrix[i][j] = 0;
+                            value = matrix[futureRow][futureCol];
+                            localDir = dir;
                         }
                         
 
                     } 
 
 
+                    tmpMatrix[i + dx[localDir]][j + dy[localDir]] += 1;
+
+
+
+
                 }
 
+            }
+        }
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                ballMatrix[i][j] = tmpMatrix[i][j];
+                tmpMatrix[i][j] = 0;
             }
         }
 
