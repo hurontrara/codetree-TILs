@@ -64,10 +64,12 @@ public class Main {
                 breakingBall();
             }
 
+            System.out.println(ballList.size());
+            ballList.clear();
+
         }
 
         // 출력
-        System.out.print(ballList.size());
 
 
 
