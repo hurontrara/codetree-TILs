@@ -59,7 +59,7 @@ public class Main {
         }
 
         // 로직
-        for (int i = 0; i < lineList.size(); i++)  {
+        for (int i = 0; i <= lineList.size(); i++)  {
             recursive(i);
         }
 
