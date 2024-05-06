@@ -28,7 +28,7 @@ public class Main {
             return;
         }
 
-        int space = n - index;
+        int space = Math.min(n - index, 4);
         for (int i = 1; i <= space; i++) {
             recursive(index + i);
         }
