@@ -87,6 +87,7 @@ public class Main {
 
             if (matrix[ball.x][ball.y] == 0) {
                 ballList.remove(i);
+                continue;
             }
 
             matrix[ball.x][ball.y] -= 1;
