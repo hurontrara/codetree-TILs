@@ -35,7 +35,10 @@ public class Main {
         queueing();
 
         // 출력
-        System.out.print(answer);
+        if (answer == Integer.MAX_VALUE)
+            System.out.print(-1);
+        else
+            System.out.print(answer);
 
 
     }
