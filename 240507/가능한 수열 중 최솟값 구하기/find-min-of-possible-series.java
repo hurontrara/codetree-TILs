@@ -69,6 +69,10 @@ public class Main {
 
 
         for (int i = 4; i <= 6; i++) {
+
+            if (index >= 1 && list.get(index - 1) == i)
+                continue;
+
             list.add(i);
             recursive(index + 1);
             list.remove(list.size() - 1);
