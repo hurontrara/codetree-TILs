@@ -47,36 +47,44 @@ public class Main {
 
         if (index == size) {
 
-            for (int length = 1; length <= size / 2; length++) {
-
-                for (int firstPoint = 0; firstPoint <= size - 2 * length; firstPoint++) {
-
-                    if (sameCheck(firstPoint, length))
-                        return;
-                }
-
-
-            }
-
             for (int i = 0; i < size; i++) {
                 System.out.print(list.get(i));
             }
             System.exit(0);
 
-
-            return;
         }
+
 
 
         for (int i = 4; i <= 6; i++) {
 
-            if (index >= 1 && list.get(index - 1) == i)
+            list.add(i);
+            boolean state = false;
+
+            for (int length = 1; length <= list.size() / 2; length++) {
+                    for (int firstPoint = 0; firstPoint <= list.size() - 2 * length; firstPoint++) {
+
+                        if (sameCheck(firstPoint, length)) {
+                            list.remove(list.size() - 1);
+                            state = true;
+                            break;
+                        }
+                    }
+                    if (state)
+                        break;
+
+
+            }
+
+            if (state)
                 continue;
 
-            list.add(i);
             recursive(index + 1);
             list.remove(list.size() - 1);
+
+
         }
+        
 
 
     }
