@@ -58,6 +58,9 @@ public class Main {
 
             }
             
+            if (matrix[present][0] == 0)
+                return;
+                
             cnt += matrix[present][0];
 
             answer = Math.min(answer, cnt);
