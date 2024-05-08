@@ -64,7 +64,7 @@ public class Main {
     static void dfs(int row, int col, int localCount) {
 
         // count 갱신
-        count = Math.max(count, localCount);
+        count++;
 
         // dfs
         for (int dir = 0; dir < 4; dir++) {
