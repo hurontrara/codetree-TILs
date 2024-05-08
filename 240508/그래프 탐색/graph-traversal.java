@@ -28,7 +28,10 @@ public class Main {
             int start = Integer.parseInt(edgeArray[0]);
             int end = Integer.parseInt(edgeArray[1]);
             matrix[start - 1][end - 1] = 1;
+            matrix[end - 1][start - 1] = 1;
+
         }
+        visited[0] = 1;
 
         // 로직
         dfs(0, 0);
