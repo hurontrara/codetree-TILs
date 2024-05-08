@@ -8,6 +8,7 @@ public class Main {
     static int[] array;
     static List<Integer> list = new ArrayList<>();
     static int answer = 0;
+    static int cnt = 0;
 
     public static void main(String[] args) throws Exception {
 
@@ -18,7 +19,9 @@ public class Main {
         array = Stream.of(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
         // 로직
-        recursive(0, 0);
+        for (int i = 0; i < n; i++) {
+            recursive(i, 0);
+        }
 
         // 출력 
         System.out.print(answer);
@@ -43,14 +46,17 @@ public class Main {
             return;
         }
 
+        if (index >= n)
+            return;
+
+
+        list.add(array[index]);
+
         for (int i = index; i < n; i++) {
-
-            list.add(array[i]);
             recursive(i + 1, count + 1);
-            list.remove(list.size() - 1);
-
 
         }
+        list.remove(list.size() - 1);
 
 
     }
