@@ -1,7 +1,4 @@
 import java.io.*;
-import java.util.stream.Stream;
-import java.util.*;
-
 
 public class Main {
 
@@ -9,15 +6,13 @@ public class Main {
     static int[][] matrix;
     static int[] visited;
 
-    static int answer = 0;
-
     public static void main(String[] args) throws Exception {
 
         // 초기화
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] nmArray = br.readLine().split(" ");
         n = Integer.parseInt(nmArray[0]); m = Integer.parseInt(nmArray[1]);
-        
+
         // n은 노드, m은 간선
         matrix = new int[n][n];
         visited = new int[n];
@@ -34,23 +29,28 @@ public class Main {
         visited[0] = 1;
 
         // 로직
-        dfs(0, 0);
+        dfs(0);
 
-        // 출력 
-        System.out.print(answer);
+        // 출력
+        int answer = 0;
+        for (int i = 0; i < visited.length; i++) {
+            if (visited[i] == 1) {
+                answer++;
+            }
+        }
+        System.out.println(answer - 1);
 
 
     }
 
-    static void dfs(int point, int count) {
+    static void dfs(int point) {
 
         for (int i = 0; i < n; i++) {
 
             if (matrix[point][i] == 1 && visited[i] == 0) {
 
                 visited[i] = 1;
-                answer = Math.max(answer, count + 1);
-                dfs(i, count + 1);
+                dfs(i);
 
 
 
