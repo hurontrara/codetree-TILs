@@ -51,6 +51,9 @@ public class Main {
 
                 cnt += matrix[present][future];
 
+                if (matrix[present][future] == 0)
+                    return;
+
                 present = future;
 
             }
