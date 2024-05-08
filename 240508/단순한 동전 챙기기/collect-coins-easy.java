@@ -99,8 +99,8 @@ public class Main {
 
                 cnt += Math.abs(currentRow - point.x) + Math.abs(currentCol - point.y);
 
-                currentRow = startRow;
-                currentCol = startCol;
+                currentRow = point.x;
+                currentCol = point.y;
             }
 
             cnt += Math.abs(currentRow - endRow) + Math.abs(currentCol - endCol);
