@@ -21,6 +21,9 @@ public class Main {
         n = Integer.parseInt(nmArray[0]); m = Integer.parseInt(nmArray[1]);
 
         matrix = new int[n][m]; visited = new int[n][m];
+        for (int i = 0; i < n; i++) {
+            matrix[i] = Stream.of(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        }
         visited[0][0] = 1;
 
         // 로직
