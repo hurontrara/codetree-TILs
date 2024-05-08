@@ -53,7 +53,7 @@ public class Main {
         // 모든 점에 대하여 거리 계산하고 최소 거리 구하기 -> 최소 거리 제곱값과 answer 비교
         if (index == n && count == m) {
             
-            int localMin = Integer.MAX_VALUE;
+            int localMax = Integer.MIN_VALUE;
             for (int i = 0; i < m; i++) {
 
                 Point firstPoint = tmpList.get(i);
@@ -62,11 +62,13 @@ public class Main {
 
                     Point secondPoint = tmpList.get(j);
                     int localDistance = (int) Math.pow(firstPoint.x - secondPoint.x, 2) + (int) Math.pow(firstPoint.y - secondPoint.y, 2);
-                    answer = Math.min(localDistance, answer);
+                    localMax = Math.max(localDistance, localMax);
 
                 }
 
             }
+
+            answer = Math.min(answer, localMax);
 
 
             return;
