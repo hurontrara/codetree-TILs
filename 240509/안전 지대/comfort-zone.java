@@ -41,6 +41,7 @@ public class Main {
 
             }
         }
+        kSet.add(1);
 
         // 로직
         // k에 대하여 tmpMatrix 초기화
