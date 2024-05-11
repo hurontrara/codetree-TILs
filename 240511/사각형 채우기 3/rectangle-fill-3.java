@@ -33,9 +33,9 @@ public class Main {
         for (int i = 0; i < index; i++) {
 
             if (i == index - 2) {
-                value += 2 * memo(i);
-            } else {
                 value += 3 * memo(i);
+            } else {
+                value += 2 * memo(i);
             }
 
         }
