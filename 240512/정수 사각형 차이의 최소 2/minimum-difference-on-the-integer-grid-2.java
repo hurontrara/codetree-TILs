@@ -93,7 +93,7 @@ public class Main {
         if (secondMax < value)
             secondMax = value;
 
-        if (firstMax - firstMin <= secondMax - secondMin) {
+        if (firstMax - firstMin < secondMax - secondMin) {
             dpMatrix[row][col] = new State(firstMin, firstMax);
         } else {
             dpMatrix[row][col] = new State(secondMin, secondMax);
