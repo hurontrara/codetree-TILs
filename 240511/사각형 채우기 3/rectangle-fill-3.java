@@ -1,17 +1,15 @@
 import java.io.*;
-import java.util.stream.Stream;
-import java.util.*;
 
 
 public class Main {
 
     static int n;
-    static int[] dp;
+    static long[] dp;
 
     public static void main(String[] args) throws Exception {
         // init
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        n = Integer.parseInt(br.readLine()); dp = new int[n + 1];
+        n = Integer.parseInt(br.readLine()); dp = new long[n + 1];
 
         dp[0] = 1;
         dp[1] = 2;
@@ -23,23 +21,23 @@ public class Main {
 
     }
 
-    static int memo(int index) {
+    static long memo(int index) {
 
-        if (dp[index] != 0){
+        if (dp[index] != 0) {
             return dp[index];
         }
 
-        int value = 0;
+        long value = 0;
         for (int i = 0; i < index; i++) {
 
             if (i == index - 2) {
-                value += 3 * memo(i);
+                value += (3 * memo(i)) % 1000000007;
             } else {
-                value += 2 * memo(i);
+                value += (2 * memo(i)) % 1000000007;
             }
 
         }
-        dp[index] = value;
+        dp[index] = value % 1000000007;
 
         return dp[index];
 
