@@ -32,6 +32,12 @@ public class Main {
             int counterKey = k - key;
 
             int value = hashMap.get(key);
+
+            if (key == counterKey) {
+                answer += (value * (value - 1));
+                continue;
+            }
+
             int counterValue = hashMap.getOrDefault(counterKey, 0);
 
             answer += (value * counterValue);
