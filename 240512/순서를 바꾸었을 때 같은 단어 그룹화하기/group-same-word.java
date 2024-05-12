@@ -14,9 +14,11 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         size = Integer.parseInt(br.readLine());
 
+
+        String[] inputArray;
         for (int i = 0; i < size; i++) {
 
-            String[] inputArray = br.readLine().split("");
+            inputArray = br.readLine().split("");
             Arrays.sort(inputArray);
             String string = "";
             for (int j = 0; j < inputArray.length; j++) {
