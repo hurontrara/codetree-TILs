@@ -8,7 +8,7 @@ public class Main {
     static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static int size;
     static final HashMap<Integer, Integer> hashMap = new HashMap<>();
-    static int answer = 0;
+    static long answer = 0;
 
     public static void main(String[] args) throws Exception {
         
