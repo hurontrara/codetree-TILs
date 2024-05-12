@@ -1,44 +1,26 @@
-import java.io.*;
 import java.util.*;
-
+import java.io.*;
 
 public class Main {
+    private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private static final Map<String, Integer> map = new HashMap<>();
 
-    static int size;
-    static HashMap<String, Integer> hashMap = new HashMap<>();
-    static int answer = 0;
+    private static int n;           //  단어 개수
+    private static int maxCnt = 0;  //  가장 많이 등장한 그룹 단어 개수
+    
+    public static void main(String[] args) throws IOException {
+        n = Integer.parseInt(br.readLine());
 
-    public static void main(String[] args) throws Exception {
+        for(int i = 0; i < n; i++) {
+            char[] input = br.readLine().toCharArray();
+            Arrays.sort(input);
+            String str = new String(input);
 
-        // init
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        size = Integer.parseInt(br.readLine());
+            map.put(str, map.getOrDefault(str, 0) + 1);
 
-
-        String[] inputArray;
-        for (int i = 0; i < size; i++) {
-
-            inputArray = br.readLine().split("");
-            Arrays.sort(inputArray);
-            StringBuffer sb = new StringBuffer();
-            for (int j = 0; j < inputArray.length; j++) {
-                sb.append(inputArray[j]);
-            }
-            String string = sb.toString();
-
-            hashMap.put(string, hashMap.getOrDefault(string, 0) + 1);
-
+            maxCnt = Math.max(maxCnt, map.get(str));
         }
 
-        // logic + print
-        for (int value : hashMap.values()) {
-            answer = Math.max(answer, value);
-        }
-
-        System.out.print(answer);
-
-
-    }
-
-
-}
+        System.out.println(maxCnt);
+    }   //  main-end
+}   //  Main-class-end
