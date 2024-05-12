@@ -20,10 +20,11 @@ public class Main {
 
             inputArray = br.readLine().split("");
             Arrays.sort(inputArray);
-            String string = "";
+            StringBuffer sb = new StringBuffer();
             for (int j = 0; j < inputArray.length; j++) {
-                string += inputArray[j];
+                sb.append(inputArray[j]);
             }
+            String string = sb.toString();
 
             hashMap.put(string, hashMap.getOrDefault(string, 0) + 1);
 
