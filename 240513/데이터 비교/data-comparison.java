@@ -24,7 +24,8 @@ public class Main {
 
         // 두번째 돌면서 첫번째에 있는 지 파악
         for (int value : secondArray) {
-            System.out.print(hashSet1.contains(value) ? 1 : 0 + " ");
+            int answer = hashSet1.contains(value) ? 1 : 0;
+            System.out.print(answer + " ");
         }
 
 
