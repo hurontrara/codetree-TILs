@@ -56,7 +56,7 @@ public class Main {
 
             int query = Integer.parseInt(br.readLine());
 
-            Point point = treeSet.higher(new Point(query, Integer.MIN_VALUE));
+            Point point = treeSet.higher(new Point(query, 0));
 
             if (point != null) {
                 treeSet.remove(point);
