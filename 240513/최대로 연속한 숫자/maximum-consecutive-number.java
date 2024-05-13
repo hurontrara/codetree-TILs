@@ -1,72 +1,66 @@
-import java.io.*;
-import java.util.*;
+import java.util.Scanner;
+import java.util.TreeSet;
 
-class State implements Comparable<State> {
+class Tuple implements Comparable<Tuple> {
+    int len, s, e;
 
-    int x;
-    int distance;
-
-    State(int x, int distance) {
-
-        this.x = x;
-        this.distance = distance;
+    public Tuple(int len, int s, int e) {
+        this.len = len;
+        this.s = s;
+        this.e = e;
     }
 
     @Override
-    public int compareTo(State state) {
-
-        return this.x - state.x;
-
+    public int compareTo(Tuple t) {
+        if(this.len != t.len)
+            return t.len - this.len;  // l 기준 내림차순 정렬
+        else if(this.s != t.s)
+            return this.s - t.s;      // s 기준 오름차순 정렬
+        else
+            return this.e - t.e;      // e 기준 오름차순 정렬
     }
-
-    State(int x) {
-        this.x = x;
-    }
-
-
 }
 
-
 public class Main {
+    // 변수 선언
+    public static int n, m;
+    public static TreeSet<Integer> sNum = new TreeSet<>();
+    public static TreeSet<Tuple> sLen = new TreeSet<>();  // (길이, 시작 숫자, 끝 숫자)
 
-    static int n, m; // 0 ~ n까지의 수열, m개의 인풋
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // 입력:
+        n = sc.nextInt();
+        m = sc.nextInt();
 
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static StringTokenizer st;
-    static StringBuilder sb = new StringBuilder();
+        // sNum : 지워진 숫자 모음(코드의 깔끔한 처리를 위해
+        // 범위 밖의 숫자를 treeset에 추가했습니다)
+        sNum.add(-1);
+        sNum.add(n + 1);
+        // sLen : (구간의 길이, 시작 숫자, 끝 숫자)
+        // 길이가 긴 구간부터 나오도록 합니다.
+        sLen.add(new Tuple(n + 1, -1, n + 1));
 
-    static TreeSet<State> treeSet = new TreeSet<>();
+        for(int i = 0; i < m; i++) {
+            // 숫자를 입력받습니다.
+            int y = sc.nextInt();
 
-    public static void main(String[] args) throws Exception {
+            // 입력받은 숫자를 treeset에 추가합니다.
+            sNum.add(y);
 
-        st = new StringTokenizer(br.readLine());
-        n = Integer.parseInt(st.nextToken()); m = Integer.parseInt(st.nextToken());
+            // 입력받은 숫자 y를 기준으로
+            // 그 바로 뒤의 숫자를 z, 바로 앞의 숫자를 x라고 두었습니다.
+            int z = sNum.higher(y);
+            int x = sNum.lower(y);
+            
+            // 구간의 길이는 (x ~ z) 구간이 사라지며,
+            // (x ~ y) 구간과 (y ~ z) 구간이 새로 생겨납니다.
+            sLen.remove(new Tuple(z - x - 1, x, z));
+            sLen.add(new Tuple(y - x - 1, x, y));
+            sLen.add(new Tuple(z - y - 1, y, z));
 
-        treeSet.add(new State(n + 1, n + 1));
-        st = new StringTokenizer(br.readLine());
-
-        for (int i = 0; i < m; i++) {
-
-            int answer = 0;
-            int value = Integer.parseInt(st.nextToken());
-
-            State newState = new State(value);
-            treeSet.add(newState);
-            newState.distance = treeSet.lower(newState) == null ? value : (value - treeSet.lower(newState).x - 1);
-
-            State afterState = treeSet.higher(newState);
-            afterState.distance = afterState.x - value - 1;
-
-
-            for (State state : treeSet) {
-                answer = Math.max(answer, state.distance);
-            }
-
-            sb.append(answer).append("\n");
-
+            // y가 추가된 후로 구간 중 가장 긴 구간을 찾아 출력합니다.
+            System.out.println(sLen.first().len);
         }
-
-        System.out.print(sb);
-
     }
 }
