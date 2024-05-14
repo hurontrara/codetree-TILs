@@ -78,8 +78,7 @@ public class Main {
         }
 
         // 초기 설정
-        Unperson unperson = unpersonQueue.poll();
-        time = unperson.arrival + unperson.time;
+        time = 0;
 
         // 로직
         process();
@@ -93,46 +92,39 @@ public class Main {
 
     static void process() {
 
-        while (true) {
+        queueAdding();
+        while (!personQueue.isEmpty()) {
 
-            if (unpersonQueue.isEmpty())
-                return;
-            
-            // 도착 큐에서 대기 큐로
-            while (!unpersonQueue.isEmpty() && unpersonQueue.peek().arrival <= time) {
+            Person person = personQueue.poll();
 
-                Unperson unperson = unpersonQueue.poll();
-                personQueue.add(new Person(unperson.num, unperson.arrival, unperson.time));
+            answer = Math.max(answer, time - person.arrival);
 
-            }
+            time += person.time;
 
-            // 만약 현재 시간보다 늦으면 시간 변경해야함
-            if (!unpersonQueue.isEmpty() && personQueue.isEmpty()) {
-
-                Unperson unperson = unpersonQueue.poll();
-                personQueue.add(new Person(unperson.num, unperson.arrival, unperson.time));
-                time = unperson.arrival;
-
-            }
-
-            // 대기 큐 진행
-            // 뽑아서 대기 시간 비교 + 현재 시간 업데이트
-            while (!personQueue.isEmpty()) {
-
-                Person person = personQueue.poll();
-
-                answer = Math.max(answer, time - person.arrival);
-
-                time += person.time;
-
-
-            }
-
-
-
+            queueAdding();
 
         }
 
+    }
+
+    static void queueAdding() {
+
+        // 도착 큐에서 대기 큐로
+        while (!unpersonQueue.isEmpty() && unpersonQueue.peek().arrival <= time) {
+
+            Unperson unperson = unpersonQueue.poll();
+            personQueue.add(new Person(unperson.num, unperson.arrival, unperson.time));
+
+        }
+
+        // 만약 현재 시간보다 늦으면 시간 변경해야함
+        if (!unpersonQueue.isEmpty() && personQueue.isEmpty()) {
+
+            Unperson unperson = unpersonQueue.poll();
+            personQueue.add(new Person(unperson.num, unperson.arrival, unperson.time));
+            time = unperson.arrival;
+
+        }
 
     }
 
