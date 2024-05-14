@@ -9,7 +9,7 @@ public class Main {
     static StringTokenizer st;
     static StringBuilder sb = new StringBuilder();
 
-    static PriorityQueue<Integer> queue = new PriorityQueue<>();
+    static PriorityQueue<Long> queue = new PriorityQueue<>();
 
     public static void main(String[] args) throws Exception {
 
@@ -18,14 +18,14 @@ public class Main {
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < size; i++) {
 
-            queue.add(Integer.parseInt(st.nextToken()));
+            queue.add(Long.parseLong(st.nextToken()));
 
             if (queue.size() < 3) {
                 sb.append("-1 \n");
                 continue;
             }
 
-            int first = queue.poll(); int second = queue.poll(); int third = queue.poll();
+            long first = queue.poll(); long second = queue.poll(); long third = queue.poll();
 
             sb.append(first * second * third).append("\n");
 
