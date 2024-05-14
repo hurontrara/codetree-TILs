@@ -29,7 +29,7 @@ public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringBuilder sb = new StringBuilder();
 
-    static PriorityQueue<Integer> queue = new PriorityQueue<>();
+    static PriorityQueue<Point> queue = new PriorityQueue<>();
 
     public static void main(String[] args) throws Exception {
 
@@ -47,13 +47,13 @@ public class Main {
 
                 } else {
 
-                    sb.append(queue.poll()).append("\n");
+                    sb.append(queue.poll().x).append("\n");
 
                 }
 
             } else {
 
-                queue.add(order);
+                queue.add(new Point(order));
 
             }
 
