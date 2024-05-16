@@ -119,13 +119,13 @@ public class Main {
 
                 // a가 가장 앞에 있을 때
                 // c가 가장 앞에 있을 때
-                if (a.prev != null) {
+                if (a.prev == null) {
 
                     headList.set(a.line, b.next);
 
                 }
 
-                if (c.prev != null) {
+                if (c.prev == null) {
 
                     headList.set(c.line, a);
 
