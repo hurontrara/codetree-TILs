@@ -29,8 +29,8 @@ public class Main {
         size = Integer.parseInt(br.readLine());
         q = Integer.parseInt(br.readLine());
 
-        Node leftNode = new Node(0); hashMap.put(0, leftNode);
-        for (int i = 1; i <= size + 1; i++) {
+        Node leftNode = new Node(1); hashMap.put(1, leftNode);
+        for (int i = 2; i <= size; i++) {
 
             Node presentNode = new Node(i);
 
@@ -49,70 +49,83 @@ public class Main {
             int a = Integer.parseInt(st.nextToken()); int b = Integer.parseInt(st.nextToken());
             int c = Integer.parseInt(st.nextToken()); int d = Integer.parseInt(st.nextToken());
 
-            // a < c 를 보장
-            if (aBiggerThanC(a, c)) {
-                int tmp1 = a; a = c; c = tmp1;
-                int tmp2 = b; b = d; d = tmp2;
-            }
-
-            Node left;
-            Node right;
             Node aNode = hashMap.get(a); Node bNode = hashMap.get(b); Node cNode = hashMap.get(c); Node dNode = hashMap.get(d);
-            Node leftTotem = aNode.prev; Node rightTotem = dNode.next;
 
-            // aNode ~ bNode 연산
-            left = aNode.prev; right = bNode.next;
+            if (bNode.next == cNode) {
 
-            if (left != null)
-                left.next = right;
-            if (right != null)
-                right.prev = left;
+                bNode.next = dNode.next;
+                if (dNode.next != null)
+                    dNode.prev = bNode;
+                
+                cNode.prev = aNode.prev; dNode.next = aNode;
 
-            left = rightTotem.prev;
-            right = rightTotem;
+                if (aNode.prev != null)
+                    aNode.prev.next = cNode;
+                aNode.prev = dNode;
 
-            aNode.prev = left; bNode.next = right;
+            }
+            else if (dNode.next == aNode) {
 
-            if (left != null)
-                left.next = aNode;
-            if (right != null)
-                right.prev = bNode;
+                dNode.next = bNode.next;
+                if (dNode.next != null)
+                    dNode.next.prev = bNode;
 
-            // cNode ~ dNode 연산
-            left = cNode.prev; right = dNode.next;
+                aNode.prev = cNode.prev;
+                bNode.next = cNode;
 
-            if (left != null)
-                left.next = right;
-            if (right != null)
-                right.prev = left;
+                if (aNode.prev != null)
+                    aNode.prev.next = aNode;
+                cNode.prev = bNode;
 
-            left = leftTotem; right = leftTotem.next;
+            }
+            else {
 
-            cNode.prev = left; dNode.next = right;
+                Node aSave = aNode.prev; Node bSave = bNode.next;
 
-            if (left != null)
-                left.next = cNode;
-            if (right != null)
-                right.prev = dNode;
+                aNode.prev = cNode.prev;
+                bNode.next = dNode.next;
 
+                if (aNode.prev != null)
+                    aNode.prev.next = aNode;
+                if (bNode.next != null) {
+                    bNode.next.prev = bNode;
+                }
+
+                cNode.prev = aSave; dNode.next = bSave;
+
+                if (cNode.prev != null)
+                    cNode.prev.next = cNode;
+                if (dNode.next != null)
+                    dNode.next.prev = dNode;
+
+
+            }
 
 
         }
 
-        Node printNode = hashMap.get(0);
+        Node printNode = hashMap.get(1);
         while (true) {
 
-            if (!(printNode.num == 0 || printNode.num == size + 1)) {
-                sb.append(printNode.num).append(" ");
-            }
-
-            if (printNode.num == size + 1)
+            if (printNode.prev == null)
                 break;
 
-            printNode = printNode.next;
+            printNode = printNode.prev;
 
 
         }
+
+        while (true) {
+
+            sb.append(printNode.num).append(" ");
+
+            if (printNode.next == null)
+                break;
+            
+            printNode = printNode.next;
+
+        }
+
 
         System.out.print(sb);
 
@@ -121,24 +134,6 @@ public class Main {
 
     }
 
-    static boolean aBiggerThanC(int a, int c) {
-
-        Node presentNode = hashMap.get(0);
-        while (true) {
-
-            if (presentNode.num == a)
-                return false;
-
-            if (presentNode.num == c)
-                return true;
-
-            presentNode = presentNode.next;
-
-
-        }
-
-
-    }
 
 
 }
