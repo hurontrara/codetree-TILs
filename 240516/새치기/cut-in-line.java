@@ -72,9 +72,19 @@ public class Main {
 
                 Person right = hashMap.get(b); Person left = right.prev; Person mid = hashMap.get(a);
 
-                int line = right.line;
-                if (left == null)
-                    headList.set(line, mid);
+                if (right.line == mid.line && left == null) {
+                    headList.set(mid.line, mid);
+                }
+
+                if (right.line != mid.line && mid.prev == null) {
+                    headList.set(mid.line, mid.next);
+                }
+
+                if (right.line != mid.line && left == null) {
+                    headList.set(right.line, mid);
+                }
+
+                mid.line = right.line;
 
                 if (mid.prev != null)
                     mid.prev.next = mid.next;
@@ -113,8 +123,29 @@ public class Main {
                 Person localHead = hashMap.get(a); Person localTail = hashMap.get(b);
                 Person tail = hashMap.get(c); Person head = tail.prev;
 
-                if (head == null)
+                if (localHead.line == tail.line && head == null) {
                     headList.set(tail.line, localHead);
+                } 
+
+                if (localHead.line != tail.line && head == null) {
+                    headList.set(tail.line, localHead);
+                }
+
+                if (localHead.line != tail.line && localHead.prev == null) {
+                    headList.set(localHead.line, localTail.next);
+                }
+
+                Person change = localHead;
+                while (true) {
+
+                    change.line = tail.line;
+                    change = change.next;
+                    
+                    if (change == null)
+                        break;
+
+                }
+
 
 
                 if (localHead.prev != null)
