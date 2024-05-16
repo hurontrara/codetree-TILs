@@ -49,8 +49,8 @@ public class Main {
             int a = Integer.parseInt(st.nextToken()); int b = Integer.parseInt(st.nextToken());
             int c = Integer.parseInt(st.nextToken()); int d = Integer.parseInt(st.nextToken());
 
-            // a < c 를 보장 
-            if (a > c) {
+            // a < c 를 보장
+            if (aBiggerThanC(a, c)) {
                 int tmp1 = a; a = c; c = tmp1;
                 int tmp2 = b; b = d; d = tmp2;
             }
@@ -67,7 +67,7 @@ public class Main {
                 left.next = right;
             if (right != null)
                 right.prev = left;
-            
+
             left = rightTotem.prev;
             right = rightTotem;
 
@@ -94,7 +94,7 @@ public class Main {
                 left.next = cNode;
             if (right != null)
                 right.prev = dNode;
-            
+
 
 
         }
@@ -108,7 +108,7 @@ public class Main {
 
             if (printNode.num == size + 1)
                 break;
-            
+
             printNode = printNode.next;
 
 
@@ -118,7 +118,26 @@ public class Main {
 
 
 
-        
+
+    }
+
+    static boolean aBiggerThanC(int a, int c) {
+
+        Node presentNode = hashMap.get(0);
+        while (true) {
+
+            if (presentNode.num == a)
+                return false;
+
+            if (presentNode.num == c)
+                return true;
+
+            presentNode = presentNode.next;
+
+
+        }
+
+
     }
 
 
