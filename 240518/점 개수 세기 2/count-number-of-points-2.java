@@ -28,13 +28,13 @@ public class Main {
     static List<Point> pointList = new ArrayList<>();
 
     static TreeMap<Integer, Integer> colTreeMap = new TreeMap<>();
-    static TreeMap<Integer, Integer> rowTreeMap = new TreeMap<>(); 
+    static TreeMap<Integer, Integer> rowTreeMap = new TreeMap<>();
 
     static int[][] matrix;
     static int[][] sumMatrix;
 
     public static void main(String[] args) throws Exception {
-        
+
         st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken()); q = Integer.parseInt(st.nextToken());
         matrix = new int[n + 1][n + 1];
@@ -83,10 +83,21 @@ public class Main {
             int x2 = Integer.parseInt(st.nextToken());
             int y2 = Integer.parseInt(st.nextToken());
 
-            int x1ToCol = colTreeMap.get(xTreeSet.ceiling(x1));
-            int y1ToRow = rowTreeMap.get(yTreeSet.ceiling(y1));
-            int x2ToCol = colTreeMap.get(xTreeSet.floor(x2));
-            int y2ToRow = rowTreeMap.get(yTreeSet.floor(y2));
+            int x1ToCol;
+            int y1ToRow;
+            int x2ToCol;
+            int y2ToRow;
+            try {
+                x1ToCol = colTreeMap.get(xTreeSet.ceiling(x1));
+                y1ToRow = rowTreeMap.get(yTreeSet.ceiling(y1));
+                x2ToCol = colTreeMap.get(xTreeSet.floor(x2));
+                y2ToRow = rowTreeMap.get(yTreeSet.floor(y2));
+
+            } catch (Exception e) {
+
+                sb.append("0 \n");
+                continue;
+            }
 
             int firstRow = y2ToRow; int firstCol = x1ToCol;
             int secondRow = y1ToRow; int secondCol = x2ToCol;
