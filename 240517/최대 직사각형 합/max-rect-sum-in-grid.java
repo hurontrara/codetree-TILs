@@ -12,7 +12,7 @@ public class Main {
     static StringTokenizer st;
     static StringBuilder sb = new StringBuilder();
 
-    static int answer = 0;
+    static int answer = Integer.MIN_VALUE;
 
     public static void main(String[] args) throws Exception {
 
@@ -54,15 +54,13 @@ public class Main {
                 for (int localCol = 0; localCol < j; localCol++) {
                     if (sumMatrix[i][localCol] - sumMatrix[i - 1][localCol] < value) {
                         col = localCol;
-                        value = sumMatrix[i][localCol];
+                        value = sumMatrix[i][localCol] - sumMatrix[i - 1][localCol];
                     }
                 }
 
                 // find answer
                 answer = Math.max(answer, sumMatrix[i][j] - sumMatrix[row][j] - sumMatrix[i][col] + sumMatrix[row][col]);
 
-                if (answer == 14)
-                    continue;
             }
         }
 
