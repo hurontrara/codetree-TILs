@@ -58,8 +58,8 @@ public class Main {
 
             int a = Integer.parseInt(st.nextToken()); int b = Integer.parseInt(st.nextToken());
 
-            Point pointA = pointTreeSet.higher(new Point(a, Integer.MIN_VALUE));
-            Point pointB = pointTreeSet.lower(new Point(b, Integer.MAX_VALUE));
+            Point pointA = pointTreeSet.higher(new Point(a, -1));
+            Point pointB = pointTreeSet.lower(new Point(b, 100001));
 
             if (pointA == null || pointB == null) {
                 sb.append("0 \n");
