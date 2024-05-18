@@ -63,6 +63,7 @@ public class Main {
 
             if (pointA == null || pointB == null) {
                 sb.append("0 \n");
+                continue;
             }
 
             sb.append(pointB.seq - pointA.seq + 1).append("\n");
