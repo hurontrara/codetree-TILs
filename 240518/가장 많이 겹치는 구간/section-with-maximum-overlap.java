@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         n = Integer.parseInt(br.readLine());
-        array = new int[100000 + 1];
+        array = new int[200000 + 1];
 
         for (int i = 0; i < n; i++) {
 
@@ -28,7 +28,7 @@ public class Main {
 
         int answer = 0;
         int sum = 0;
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 200000; i++) {
 
             sum += array[i];
             answer = Math.max(answer, sum);
