@@ -61,6 +61,10 @@ public class Main {
             Point pointA = pointTreeSet.higher(new Point(a, Integer.MIN_VALUE));
             Point pointB = pointTreeSet.lower(new Point(b, Integer.MAX_VALUE));
 
+            if (pointA == null || pointB == null) {
+                sb.append("0 \n");
+            }
+
             sb.append(pointB.seq - pointA.seq + 1).append("\n");
 
         }
