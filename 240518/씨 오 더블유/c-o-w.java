@@ -47,11 +47,11 @@ public class Main {
         }
 
 
-        int answer = 0;
+        long answer = 0;
         for (int i = 0; i < n; i++) {
 
             if (inputArray[i] == 'O')
-                answer += cCount[i] * wCount[i];
+                answer += (long) cCount[i] * (long) wCount[i];
 
         }
         System.out.print(answer);
