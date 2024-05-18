@@ -6,10 +6,10 @@ public class Main {
 
     static int n;
 
-    static int total = 0;
+    static long total = 0;
 
     static int[] array;
-    static int[] sumArray;
+    static long[] sumArray;
 
     static int[] firstCountArray;
     static int[] secondCountArray;
@@ -20,7 +20,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         n = Integer.parseInt(br.readLine());
-        array = new int[n]; sumArray = new int[n];
+        array = new int[n]; sumArray = new long[n];
         firstCountArray = new int[n]; secondCountArray = new int[n];
 
         st = new StringTokenizer(br.readLine());
@@ -58,12 +58,12 @@ public class Main {
 
         }
 
-        int answer = 0;
+        long answer = 0;
         for (int i = 1; i < n - 2; i++) {
 
             if (sumArray[i] == total / 2) {
 
-                answer += firstCountArray[i - 1] * (secondCountArray[n - 2] - secondCountArray[i]);
+                answer += (long) firstCountArray[i - 1] * (long) (secondCountArray[n - 2] - secondCountArray[i]);
 
             }
 
