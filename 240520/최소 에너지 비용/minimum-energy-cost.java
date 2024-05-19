@@ -3,10 +3,10 @@ import java.util.*;
 
 class Place implements Comparable<Place> {
 
-    int x;
+    long x;
     int cost;
 
-    Place(int x, int cost) {
+    Place(long x, int cost) {
         this.x = x;
         this.cost = cost;
     }
@@ -15,7 +15,7 @@ class Place implements Comparable<Place> {
     public int compareTo(Place place) {
         
         if (this.cost == place.cost)
-            return this.x - place.x;
+            return (this.x - place.x) >= 0 ? 1 : -1;
 
         return this.cost - place.cost;
 
@@ -29,7 +29,7 @@ public class Main {
 
     static int n;
 
-    static int[] distanceArray;
+    static long[] distanceArray;
     static int[] placeArray;
 
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -42,12 +42,12 @@ public class Main {
 
         n = Integer.parseInt(br.readLine());
 
-        distanceArray = new int[n - 1]; placeArray = new int[n];
+        distanceArray = new long[n - 1]; placeArray = new int[n];
 
         st = new StringTokenizer(br.readLine());
     
 
-        int distance = 0;
+        long distance = 0;
         for (int i = 0; i < n - 1; i++) {
             // 누적합으로
             distance += Integer.parseInt(st.nextToken());
@@ -68,7 +68,7 @@ public class Main {
         Collections.sort(placeList);
 
         long cost = 0;
-        int dest = distanceArray[n - 2];
+        long dest = distanceArray[n - 2];
         for (Place place : placeList) {
 
             // 무조건 앞에 있음을 보장
