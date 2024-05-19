@@ -100,7 +100,7 @@ public class Main {
 
             else {
 
-                NewPoint newPoint = presentSet.higher(new NewPoint(-1, point.y, -1, -1));
+                NewPoint newPoint = presentSet.higher(new NewPoint(-1000000001, point.y, -1, -1));
 
                 presentSet.remove(newPoint);
 
