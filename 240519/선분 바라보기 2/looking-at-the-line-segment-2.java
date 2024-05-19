@@ -1,6 +1,34 @@
 import java.io.*;
 import java.util.*;
 
+class NewPoint implements Comparable<NewPoint> {
+
+    int x;
+    int y;
+    int coef;
+    int num;
+
+
+    NewPoint(int x, int y, int coef, int num) {
+        this.x = x;
+        this.y = y;
+        this.coef = coef;
+        this.num = num;
+    }
+
+    @Override
+    public int compareTo(NewPoint point) {
+
+        if (this.y == point.y)
+            return this.x - point.x;
+
+        return this.y - point.y;
+
+    }
+
+}
+
+
 class Point implements Comparable<Point> {
 
     int x;
@@ -36,7 +64,7 @@ public class Main {
 
     static List<Point> pointList = new ArrayList<>();
 
-    static TreeSet<Integer> ySet = new TreeSet<>(); // y값 저장
+    static TreeSet<NewPoint> presentSet = new TreeSet<>(); // y값 저장
     static HashSet<Integer> answerSet = new HashSet<>(); // 정답값 저장
 
     public static void main(String[] args) throws Exception {
@@ -60,27 +88,36 @@ public class Main {
 
             if (point.coef == 1) {
 
-                ySet.add(point.y);
+                NewPoint newPoint = new NewPoint(point.x, point.y, point.coef, point.num);
 
-                if (ySet.lower(point.y) == null) {
+                presentSet.add(newPoint);
 
+                if (presentSet.first() == newPoint) {
                     answerSet.add(point.num);
+                }
+
+            }
+
+            else {
+
+                NewPoint newPoint = presentSet.higher(new NewPoint(-1, point.y, -1, -1));
+
+                presentSet.remove(newPoint);
+
+                if (!presentSet.isEmpty() && presentSet.lower(newPoint) == null) {
+
+                    answerSet.add(presentSet.first().num);
 
                 }
 
 
-            } else {
-
-                ySet.remove(point.y);
-
-                if (!ySet.isEmpty())
-                    answerSet.add(ySet.first());
 
             }
 
         }
-
+        
         System.out.print(answerSet.size());
+
 
 
     }
