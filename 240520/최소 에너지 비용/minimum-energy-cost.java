@@ -67,7 +67,7 @@ public class Main {
         }
         Collections.sort(placeList);
 
-        int cost = 0;
+        long cost = 0;
         int dest = distanceArray[n - 2];
         for (Place place : placeList) {
 
@@ -76,7 +76,7 @@ public class Main {
                 continue;
             }
 
-            cost += place.cost * (dest - place.x);
+            cost += (long) place.cost * (long) (dest - place.x);
 
             dest = place.x;
 
