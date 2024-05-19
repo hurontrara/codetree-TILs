@@ -91,7 +91,9 @@ public class Main {
             if (cnt == 0) {
 
                 length += point.value - totem.value;
-                totem = point;
+
+                if (point != pointList.get(pointList.size() - 1))
+                    totem = pointList.get(i + 1);
 
             }
 
