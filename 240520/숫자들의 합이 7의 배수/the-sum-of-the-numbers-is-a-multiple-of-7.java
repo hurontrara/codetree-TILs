@@ -24,8 +24,8 @@ public class Main {
 
 
         sumArray[0] = 0; 
-        for (int i = 1; i < n; i++) {
-            sumArray[i] = sumArray[i - 1] + array[i];
+        for (int i = 1; i < n + 1; i++) {
+            sumArray[i] = sumArray[i - 1] + array[i - 1];
         }
 
         int answer = 0;
