@@ -38,9 +38,6 @@ public class Main {
                 hashMap.put(value, i);
             }
 
-            if (sumArray[i] == 0)
-                continue;
-
             answer = Math.max(answer, i - hashMap.get(value));
 
         }
