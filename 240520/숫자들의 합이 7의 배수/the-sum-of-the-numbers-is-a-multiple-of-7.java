@@ -30,7 +30,7 @@ public class Main {
 
         int answer = 0;
         hashMap.put(0, 0);
-        for (int i = 1; i < n; i++) {
+        for (int i = 1; i < n + 1; i++) {
 
             int value = sumArray[i] % 7;
 
