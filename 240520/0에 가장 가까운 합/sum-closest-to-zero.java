@@ -10,6 +10,8 @@ public class Main {
 
     static TreeSet<Integer> treeSet = new TreeSet<>();
 
+    static HashMap<Integer, Integer> hashMap = new HashMap<>();
+
     public static void main(String[] args) throws Exception {
 
         n = Integer.parseInt(br.readLine());
@@ -17,7 +19,9 @@ public class Main {
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
 
-            treeSet.add(Integer.parseInt(st.nextToken()));
+            int input = Integer.parseInt(st.nextToken());
+            treeSet.add(input);
+            hashMap.put(input, hashMap.getOrDefault(input, 0) + 1); 
 
         }
 
@@ -29,10 +33,12 @@ public class Main {
             Integer a = treeSet.ceiling(reverseValue);
             Integer b = treeSet.floor(reverseValue);
 
-            if (a != null)
+
+
+            if (a != null && (a != value || hashMap.get(value) >= 2))
                 answer = Math.min(answer, Math.abs(value + a));
 
-            if (b != null)
+            if (b != null && (b != value || hashMap.get(value) >= 2))
                 answer = Math.min(answer, Math.abs(value + b));
 
         }
