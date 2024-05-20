@@ -7,7 +7,7 @@ public class Main {
     static int n;
 
     static int[] array;
-    static int[] sumArray;
+    static long[] sumArray;
 
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -16,7 +16,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         n = Integer.parseInt(br.readLine());
-        array = new int[n]; sumArray = new int[n + 1];
+        array = new int[n]; sumArray = new long[n + 1];
 
         for (int i = 0; i < n; i++) {
             array[i] = Integer.parseInt(br.readLine());
@@ -32,7 +32,7 @@ public class Main {
         hashMap.put(0, 0);
         for (int i = 1; i < n + 1; i++) {
 
-            int value = sumArray[i] % 7;
+            int value = (int) (sumArray[i] % 7);
 
             if (!hashMap.containsKey(value)) {
                 hashMap.put(value, i);
