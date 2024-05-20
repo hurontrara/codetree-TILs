@@ -44,6 +44,17 @@ public class Main {
 
 
         }
+        for (int key : hashMap.keySet()) {
+
+            int value = hashMap.get(key);
+
+            if (value >= 2 && key * 2 <= m) {
+                answer += value * (value - 1) / 2;
+            } 
+
+        }
+
+
         System.out.print(answer);
 
 
