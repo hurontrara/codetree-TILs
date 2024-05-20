@@ -79,7 +79,7 @@ public class Main {
 
 
         }
-        System.out.print(answer);
+        System.out.print(answer == Integer.MAX_VALUE ? -1 : answer);
 
 
 
