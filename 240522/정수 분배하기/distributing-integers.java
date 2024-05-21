@@ -23,13 +23,13 @@ public class Main {
         Arrays.sort(array);
 
         // 작거나 같은 것 중에서 최댓값
-        int left = 1; int right = array[0]; // left = 1, right = 457
+        int left = 1; int right = array[n - 1]; // left = 1, right = 457
         int idx = 0;
         while (left <= right) {
 
             int mid = (left + right) / 2;
 
-            int count = 0;
+            long count = 0;
             for (int value : array) {
                 count += value / mid;
             }
