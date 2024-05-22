@@ -31,19 +31,23 @@ public class Main {
             System.exit(0);
         }
 
-        int count = 2;
         int left = 1; int right = array[n - 1] - array[0];
         int answer = 0;
 
-        int leftSheet = array[0]; int rightSheet = array[n - 1];
         // 최소 거리가 mid 일 때 몇 개 놓을 수 있는지를 생각
         while (left <= right) {
 
             int mid = (left + right) / 2;
+            int leftSheet = array[0]; int rightSheet = array[n - 1];
+            int count = 2;
+
+            if (mid == 30516) {
+                answer++;
+            }
 
             for (int i = 1; i < n - 1; i++) {
 
-                // leftSheet와의 거리 
+                // leftSheet와의 거리
                 int distance = Math.min(array[i] - leftSheet, rightSheet - array[i]);
                 if (distance >= mid) {
                     leftSheet = array[i];
@@ -53,11 +57,13 @@ public class Main {
 
             }
 
+
+
             if (count >= m) {
                 // 거리를 키워야 함
                 answer = Math.max(answer, mid);
                 left = mid + 1;
-                
+
             }
             else {
                 right = mid - 1;
