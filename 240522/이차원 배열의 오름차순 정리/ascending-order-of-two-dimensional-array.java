@@ -18,23 +18,23 @@ public class Main {
         }
 
         long left = 1; long right = (long) Math.min(Math.pow(10, 9), Math.pow(n, 2));
-        long idx = 0;
+        long idx = right;
         while (left <= right) {
 
             long mid = (left + right) / 2;
 
             // mid가 몇 번째인지
             long count = 0;
-            for (int i = 1; i <= mid; i++) {
-                count += (mid / i);
+            for (int i = 1; i <= n; i++) {
+                count += Math.min(mid / i, n);
             }
 
-            if (count <= k) {
-                idx = Math.max(idx, mid);
-                left = mid + 1;
+            if (count >= k) {
+                idx = Math.min(idx, mid);
+                right = mid - 1;
             }
             else {
-                right = mid - 1;
+                left = mid + 1;
             }
 
 
