@@ -24,8 +24,6 @@ public class Main {
 
         System.out.print(dp(n));
 
-
-
     }
 
     static long dp(int index) {
@@ -34,7 +32,7 @@ public class Main {
             return dpArray[index];
 
         
-        dpArray[index] = dpArray[index - 1] + dpArray[index - 2];
+        dpArray[index] = dp(index - 1) + dp(index - 2);
 
         return dpArray[index];
 
