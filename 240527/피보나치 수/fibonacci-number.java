@@ -14,6 +14,11 @@ public class Main {
         n = Integer.parseInt(br.readLine());
         dpArray = new long[n + 1];
 
+        if (n == 1) {
+            System.out.print(1);
+            System.exit(0);
+        }
+
         dpArray[1] = 1;
         dpArray[2] = 1;
 
