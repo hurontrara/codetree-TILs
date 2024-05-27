@@ -34,7 +34,7 @@ public class Main {
             return dpArray[index];
 
         
-        dpArray[index] = dpArray[index - 1] + dpArray[index] - 2;
+        dpArray[index] = dpArray[index - 1] + dpArray[index];
 
         return dpArray[index];
 
