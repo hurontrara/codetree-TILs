@@ -36,11 +36,11 @@ public class Main {
                     int secondRow = i + 2; int secondCol = j;
 
                     if (existCheck(firstRow, firstCol)) {
-                        dpMatrix[firstRow][firstCol] = dpMatrix[i][j] + array[firstRow];
+                        dpMatrix[firstRow][firstCol] = Math.max(dpMatrix[i][j] + array[firstRow], dpMatrix[firstRow][firstCol]);
                     }
 
                     if (existCheck(secondRow, secondCol)) {
-                        dpMatrix[secondRow][secondCol] = dpMatrix[i][j] + array[secondRow];
+                        dpMatrix[secondRow][secondCol] = Math.max(dpMatrix[i][j] + array[secondRow], dpMatrix[secondRow][secondCol]);
                     }
 
                 }
