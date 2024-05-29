@@ -1,55 +1,44 @@
-import java.io.*;
-import java.util.*;
-
+import java.util.Scanner;
 
 public class Main {
+    public static final int MOD = 1000000007;
+    public static final int MAXN = 1005;
+    public static int n;
+    public static int[][][] dp = new int[MAXN][5][5];
 
-    static int n;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-    static long[][] dpMatrix;
+        // n 값을 입력받습니다.
+        n = sc.nextInt();
 
-    static int c = (int) 1e9 + 7;
+        // 초기 상태를 설정합니다. 
+        dp[1][1][0] = 1;  // 첫 번째 날에 T를 받은 경우
+        dp[1][0][1] = 1;  // 첫 번째 날에 B를 받은 경우
+        dp[1][0][0] = 1;  // 첫 번째 날에 G를 받은 경우
 
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-    public static void main(String[] args) throws Exception {
-
-        n = Integer.parseInt(br.readLine());
-        dpMatrix = new long[n + 1][4];
-
-        // init
-        dpMatrix[0][0] = 1;
-
-        for (int i = 0; i <= n - 1; i++) {
+        // 동적 프로그래밍을 사용해 문제를 해결합니다.
+        // dp[i][j][k] :: i번째 날에, T를 총합 j회 받았고, B를 최근 k회 연속 받은 경우의 가짓수
+        for (int i = 1; i < n; i++) {
             for (int j = 0; j < 3; j++) {
-
-                if (dpMatrix[i][j] == 0)
-                    continue;
-
-                long value = 0;
-                value += (dpMatrix[i][j] * 2) % c;
-                value -= (existCheck(i - 2, j) ? 1 : 0) % c;
-                dpMatrix[i + 1][j] += value % c;
-
-                dpMatrix[i + 1][j + 1] += dpMatrix[i][j] % c;
-
-
+                for (int k = 0; k < 3; k++) {
+                    // 다음 날로 넘어가는 경우의 수를 갱신합니다.
+                    dp[i + 1][j + 1][0] = (dp[i + 1][j + 1][0] + dp[i][j][k]) % MOD;
+                    dp[i + 1][j][0] = (dp[i + 1][j][0] + dp[i][j][k]) % MOD;
+                    dp[i + 1][j][k + 1] = (dp[i + 1][j][k + 1] + dp[i][j][k]) % MOD;
+                }
             }
         }
 
-        long answer = 0;
-        for (int i = 0; i < 3; i++) {
-            answer += dpMatrix[n][i] % c;
+        // 최종 결과를 계산합니다.
+        int ans = 0;
+        for (int j = 0; j < 3; j++) {
+            for (int k = 0; k < 3; k++) {
+                ans = (ans + dp[n][j][k]) % MOD;
+            }
         }
-        System.out.print(answer % c);
 
-
-
+        // 결과를 출력합니다.
+        System.out.println(ans);
     }
-
-    static boolean existCheck(int row, int col) {
-        return row >= 0 && dpMatrix[row][col] > 0;
-    }
-
-
 }
