@@ -25,7 +25,7 @@ public class Main {
         }
 
         // j = B Array
-        dpMatrix = new int[2 * n][2 * n];
+        dpMatrix = new int[2 * n][2 * n + 1];
         dpMatrix[0][0] = aArray[0]; dpMatrix[0][1] = bArray[0];
 
         for (int i = 0; i < 2 * n - 1; i++) {
