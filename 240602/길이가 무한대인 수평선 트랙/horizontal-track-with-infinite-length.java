@@ -48,6 +48,8 @@ public class Main {
 
             if (minPosition <= frontHuman.lastPosition)
                 cnt++;
+            else
+                minPosition = frontHuman.lastPosition;
 
             human = frontHuman;
 
