@@ -92,7 +92,7 @@ public class Main {
     }
     
     static boolean existCheckAndNotVisit(int x, int y) {
-        return x >= 0 && x < n && y >= 0 && y < m && visited[x][y] == 0;
+        return x >= 0 && x < n && y >= 0 && y < m && visited[x][y] == 0 && matrix[x][y] == 1;
     }
 
 
